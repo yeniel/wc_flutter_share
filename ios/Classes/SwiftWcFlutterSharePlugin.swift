@@ -46,12 +46,13 @@ public class SwiftWcFlutterSharePlugin: NSObject, FlutterPlugin {
         }
 
         // present the view controller
-        let controller = UIApplication.shared.keyWindow!.rootViewController as! FlutterViewController
+        let controller = UIApplication.shared.keyWindow!.rootViewController as! UINavigationController
         activityViewController.popoverPresentationController?.sourceView = controller.view
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             if let popover = activityViewController.popoverPresentationController {
                 popover.sourceView = controller.view
+                /*
                 let bounds = controller.view.bounds
                 
                 let originX:NSNumber = argsMap.value(forKey: "originX") as! NSNumber
@@ -70,9 +71,12 @@ public class SwiftWcFlutterSharePlugin: NSObject, FlutterPlugin {
                                             y:originY.doubleValue,
                                             width:originWidth.doubleValue,
                                             height:originHeight.doubleValue);
-            }
-        }
+                 */
 
-        controller.show(activityViewController, sender: self)
+                controller.show(activityViewController, sender: self)
+            }
+        } else {
+            controller.present(activityViewController, animated: true, completion: nil)
+        }
     }
 }
